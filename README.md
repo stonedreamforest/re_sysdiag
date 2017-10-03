@@ -23,8 +23,10 @@
 ## 构建工具
 1. Visual Studio 2015 update3
 2. windows driver kit 14193
-- [Download the Windows Driver Kit (WDK)][98]
-- [GET VISUAL STUDIO COMMUNITY 2015][97]
+
+## 下载
+- [下载wdk][98]
+- [下载vs2015][97]
 
 
 
