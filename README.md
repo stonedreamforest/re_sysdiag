@@ -4,23 +4,35 @@
 
 
 ## 特征
------------
 - ...
 
 
 
 
 ## 软件网站
----------------
 - [火绒安全软件][99]
 
 
 
 
 ## 作者
----------------
 - [Tennn][1]
 
 
+
+## 构建工具
+1. Visual Studio 2015 update3
+2. windows driver kit 14193
+- [Download the Windows Driver Kit (WDK)][98]
+- [GET VISUAL STUDIO COMMUNITY 2015][97]
+
+
+
+
+
+
+
 [1]:https://github.com/stonedreamforest
+[97]: https://go.microsoft.com/fwlink/p/?LinkId=534599
+[98]: https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit
 [99]: http://www.huorong.cn/index.html
