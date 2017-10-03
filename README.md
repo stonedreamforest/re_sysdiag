@@ -39,6 +39,10 @@
 - [Tennn][1]
 
 
+
+## 其它
+_欢迎任何有助于项目发展的的建议与修改_
+
 [1]:https://github.com/stonedreamforest
 [97]: https://go.microsoft.com/fwlink/p/?LinkId=534599
 [98]: https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit
