@@ -23,7 +23,7 @@
 
 
 
-extern SYSDIAG g_sysdiag;
+
 
 //NTKERNELAPI VOID NTAPI SeDeleteAccessState(
 extern NTKERNELAPI  PSHORT NtBuildNumber;
@@ -48,6 +48,6 @@ extern INIT_FUNTABLE	g_init_ftD;
 
 
 
-
-
+extern SYSDIAG g_sysdiag;
+extern INIT_MEMOBJECT g_init_memob;
 

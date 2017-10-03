@@ -100,7 +100,19 @@ typedef struct _INIT_LIST {
 }INIT_LIST , *PINIT_LIST;
 
 
-
+typedef struct _INIT_MEMOBJECT {
+	void*   v_0;            //  0x00
+	PKSPIN_LOCK SpinLock;   //  0x08
+	USHORT  Length_a;       //  0x10
+	USHORT  Length_b;       //  0x12
+	int     i_14;           //  0x14
+	void*   memptr;         //  0x18
+	void*   Object;         //  0x20
+	void*   v_28;           //  0x28
+	int     i_30;           //  0x30
+	int     i_34;           //  0x34
+	void*   v_38;           //  0x38
+}INIT_MEMOBJECT , *PINIT_MEMOBJECT;
 
 
 

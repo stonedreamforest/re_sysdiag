@@ -59,6 +59,40 @@ void *hr_AllocatePoolWithTag(POOL_TYPE PoolType , size_t NumberOfBytes , ULONG T
 	return ptr;
 }
 
+NTSTATUS hr_SetNoInteractiveServices() {
+	NTSTATUS status = 0;
+	ULONG Data = 0;
+	HANDLE KeyHandle;
+	UNICODE_STRING ValueName;
+	UNICODE_STRING DestinationString;
+	OBJECT_ATTRIBUTES ObjectAttributes;
+
+	RtlInitUnicodeString(&DestinationString , L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\Windows");
+	RtlInitUnicodeString(&ValueName , L"NoInteractiveServices");
+#if 0
+	ObjectAttributes.Length = sizeof(OBJECT_ATTRIBUTES);	//	0x30
+	ObjectAttributes.ObjectName = &DestinationString;
+	ObjectAttributes.RootDirectory = 0i64;
+	ObjectAttributes.Attributes = OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE;	//	0x240
+	ObjectAttributes.SecurityDescriptor = NULL;
+#else
+	InitializeObjectAttributes(&ObjectAttributes ,
+							   &DestinationString ,
+							   OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE ,
+							   NULL ,
+							   NULL);
+#endif
+	if (ZwOpenKey(&KeyHandle , 0xF003F , &ObjectAttributes)) {
+		return 0xFFFFFFF3;
+	}
+	status = ZwSetValueKey(KeyHandle , &ValueName , 0 , REG_DWORD , &Data , sizeof(Data));
+	ZwClose(KeyHandle);
+	if (status < 0) {
+		return 0xFFFFFFF2;
+	}
+	return status;
+}
+
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	if ((USHORT) NtBuildNumber < 0xa28) {
 		return 0xC00000BB;
@@ -68,7 +102,10 @@ NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , 
 		return 0x0C000009A;
 	}
 	memmove(ptr , RegistryPath->Buffer , RegistryPath->Length);
-
+	g_init_memob.memptr = ptr;
+	g_init_memob.Length_a = RegistryPath->Length;
+	g_init_memob.Length_b = RegistryPath->Length;
+	hr_SetNoInteractiveServices();
 	return 0;
 
 }

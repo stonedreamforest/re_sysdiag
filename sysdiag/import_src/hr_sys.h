@@ -21,6 +21,13 @@ char sub_14003AA20(void   *a1 , long long a2);
 //	函数功能  :  申请内存	sub_14000AFD0 
 //************************************************************************************************************
 void *hr_AllocatePoolWithTag(POOL_TYPE PoolType , size_t NumberOfBytes , ULONG Tag);
+
+//************************************************************************************************************
+//	创建作者  :  Tennn
+//  修改时间  :  2017/10/03 20:29
+//	函数功能  :  设置交互式服务？	sub_14000E030
+//************************************************************************************************************
+NTSTATUS hr_SetNoInteractiveServices();
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
 char sub_14000D8A0(void *a1 , long long a2);
 
