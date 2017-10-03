@@ -51,3 +51,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 *.tlog
+sysdiag/x64/Debug/sysdiag.tlog/inf2cat-expand.10748.read.1.tlog
+sysdiag/x64/Debug/sysdiag.tlog/inf2cat-expand.10748.read.1.tlog
