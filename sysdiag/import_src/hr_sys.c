@@ -1,6 +1,6 @@
 #include "global.h"
 
-NTSTATUS sub_14003C0D0(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath){
+NTSTATUS sub_14003C0D0(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	UNREFERENCED_PARAMETER(RegistryPath);
 
 	return 0;
@@ -16,7 +16,7 @@ char sub_14003C170(void *a1 , long long a2) {
 
 }
 
-NTSTATUS sub_140038E30(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath) {
+NTSTATUS sub_140038E30(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	UNREFERENCED_PARAMETER(RegistryPath);
 
 	return 0;
@@ -33,7 +33,7 @@ char sub_140038EC0(void *a1 , long long a2) {
 
 }
 
-NTSTATUS sub_14003A930(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath) {
+NTSTATUS sub_14003A930(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	UNREFERENCED_PARAMETER(RegistryPath);
 
 	return 0;
@@ -49,7 +49,26 @@ char sub_14003AA20(void *a1 , long long a2) {
 
 }
 
-NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath) {
+
+void *hr_AllocatePoolWithTag(POOL_TYPE PoolType , size_t NumberOfBytes , ULONG Tag) {
+	Tag = Tag ? Tag : 0x54646566;
+	void *ptr = ExAllocatePoolWithTag(PoolType , NumberOfBytes , Tag);
+	if (ptr) {
+		memset(ptr , 0 , NumberOfBytes);
+	}
+	return ptr;
+}
+
+NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
+	if ((USHORT) NtBuildNumber < 0xa28) {
+		return 0xC00000BB;
+	}
+	void *ptr = hr_AllocatePoolWithTag(0 , RegistryPath->Length , 0);
+	if (!ptr) {
+		return 0x0C000009A;
+	}
+	memmove(ptr , RegistryPath->Buffer , RegistryPath->Length);
+
 	return 0;
 
 }
