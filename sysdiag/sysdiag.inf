@@ -1,0 +1,32 @@
+;
+; sysdiag.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=
+ClassGuid={1212E551-4A6B-4DAE-8BEA-21184305E9D5};
+Provider=Tennn;
+DriverVer=
+CatalogFile=Tennn.cat;
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+
+
+[Strings]
+ManufacturerName=""
+ClassName=""
+DiskName="sysdiag Source Disk"
