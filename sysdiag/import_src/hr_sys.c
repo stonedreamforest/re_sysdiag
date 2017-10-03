@@ -60,7 +60,6 @@ void *hr_AllocatePoolWithTag(POOL_TYPE PoolType , size_t NumberOfBytes , ULONG T
 }
 
 NTSTATUS hr_SetNoInteractiveServices() {
-	NTSTATUS status = 0;
 	ULONG Data = 0;
 	HANDLE KeyHandle;
 	UNICODE_STRING ValueName;
@@ -85,12 +84,12 @@ NTSTATUS hr_SetNoInteractiveServices() {
 	if (ZwOpenKey(&KeyHandle , 0xF003F , &ObjectAttributes)) {
 		return 0xFFFFFFF3;
 	}
-	status = ZwSetValueKey(KeyHandle , &ValueName , 0 , REG_DWORD , &Data , sizeof(Data));
+	NTSTATUS status = ZwSetValueKey(KeyHandle , &ValueName , 0 , REG_DWORD , &Data , sizeof(Data));
 	ZwClose(KeyHandle);
 	if (status < 0) {
 		return 0xFFFFFFF2;
 	}
-	return status;
+	return 0;
 }
 
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
