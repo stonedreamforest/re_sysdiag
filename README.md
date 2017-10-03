@@ -13,13 +13,6 @@
 - [火绒安全软件][99]
 
 
-
-
-## 作者
-- [Tennn][1]
-
-
-
 ## 构建工具
 1. Visual Studio 2015 update3
 2. windows driver kit 14193
@@ -32,6 +25,8 @@
 
 
 
+## 作者
+- [Tennn][1]
 
 
 [1]:https://github.com/stonedreamforest
