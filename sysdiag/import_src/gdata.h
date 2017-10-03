@@ -10,7 +10,7 @@
 
 #define PRINT_INFO	DbgPrint("------------------------------------------------------\n");	\
 					DbgPrint("逆向火绒安全软件 ————————> sysydiag.sys\n");					\
-					DbgPrint("项目地址:\n");													\
+					DbgPrint("项目地址:https://github.com/stonedreamforest/re_sysdiag\n");													\
 					DbgPrint("网站:https://github.com/stonedreamforest\n");					\
 					DbgPrint("作者:Tennn\n");												\
 					DbgPrint("------------------------------------------------------\n");
