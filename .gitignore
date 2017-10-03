@@ -53,3 +53,14 @@ dkms.conf
 *.tlog
 sysdiag/x64/Debug/sysdiag.tlog/inf2cat-expand.10748.read.1.tlog
 sysdiag/x64/Debug/sysdiag.tlog/inf2cat-expand.10748.read.1.tlog
+*.ipch
+*.db
+*.opendb
+x64/Debug/sysdiag_x64.sys
+x64/Debug/sysdiag_x64.cer
+x64/Debug/sysdiag/tennn.cat
+x64/Debug/sysdiag/sysdiag_x64.sys
+x64/Debug/sysdiag/sysdiag.inf
+x64/Debug/sysdiag.inf
+sysdiag/x64/Debug/sysdiag.inf
+*.log
