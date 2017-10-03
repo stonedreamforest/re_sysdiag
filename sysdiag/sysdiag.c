@@ -12,9 +12,7 @@
 
 
 NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING RegistryPath) {
-	UNREFERENCED_PARAMETER(RegistryPath);
 	NTSTATUS status = 0;
-
 
 #ifdef DBG
 	__debugbreak();
