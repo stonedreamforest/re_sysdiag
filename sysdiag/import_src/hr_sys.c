@@ -1,5 +1,6 @@
 #include "global.h"
 
+
 NTSTATUS sub_14003C0D0(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	UNREFERENCED_PARAMETER(RegistryPath);
 
@@ -92,6 +93,39 @@ NTSTATUS hr_SetNoInteractiveServices() {
 	return 0;
 }
 
+NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_DeviceName , const WCHAR *u_SymbolicLinkName , PDEVICE_OBJECT pdevice_object) {
+	UNICODE_STRING DestinationString;
+	UNICODE_STRING DefaultSDDLString;
+	UNICODE_STRING SymbolicLinkName;
+
+	if (u_DeviceName) {
+		RtlInitUnicodeString(&DestinationString , u_DeviceName);
+	}
+	RtlInitUnicodeString(&DefaultSDDLString , L"D:P(A;;GA;;;WD)");
+	NTSTATUS status = WdmlibIoCreateDeviceSecure(pDriverObject ,
+												 0 ,
+												 &DestinationString ,
+												 0x22u ,
+												 0x100u ,
+												 0 ,
+												 &DefaultSDDLString ,
+												 0 ,
+												 &pdevice_object);
+	if (status < 0) {
+		return status;
+	}
+	if (u_SymbolicLinkName) {
+		RtlInitUnicodeString(&SymbolicLinkName , u_SymbolicLinkName);
+		status = IoCreateSymbolicLink(&SymbolicLinkName , &DestinationString);
+		if (status < 0) {
+			IoDeleteDevice(pdevice_object);
+			return status;
+		}
+
+	}
+	return 0;
+}
+
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	if ((USHORT) NtBuildNumber < 0xa28) {
 		return 0xC00000BB;
@@ -105,6 +139,15 @@ NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , 
 	g_init_memob.Length_a = RegistryPath->Length;
 	g_init_memob.Length_b = RegistryPath->Length;
 	hr_SetNoInteractiveServices();
+	NTSTATUS status = hr_CreateDeviceSecure(pdriver_object , L"\\Device\\HR::ActMon" , L"\\??\\HR::ActMon" , g_init_memob.ActMonDeviceObject);
+	if (status < 0) {
+		return status;
+	}
+	status = hr_CreateDeviceSecure(pdriver_object , L"\\Device\\HR::DTrampo", L"\\??\\HR::DTrampo", g_init_memob.ActMonDeviceObject);
+	if (status < 0) {
+		return status;
+	}
+
 	return 0;
 
 }

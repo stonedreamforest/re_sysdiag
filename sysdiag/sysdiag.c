@@ -29,7 +29,7 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 #endif // DBG
 
 	//	不支持xp以下版本
-	if ((USHORT)NtBuildNumber < 0xa28) {
+	if ((USHORT) NtBuildNumber < 0xa28) {
 		return 0xC00000BB;
 	}
 
@@ -97,19 +97,19 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 	PINIT_LIST list = g_LT;
 	int IoRegister_flag = 0;
 	int unload_flag = 1;
-	if (list) {
-		for (; list->pnext_list;) {
-			status = list->pnext_ft->subA(list->pnext_ft , DriverObject , RegistryPath);
-			if (status < 0) {
-				//退出清理
-				hr_ExitCleaner(DriverObject);
-				return unload_flag ? status : 0;
-			}
-			IoRegister_flag = list->pnext_ft->v_10 ? 1 : IoRegister_flag;
-			unload_flag = list->pnext_ft->subB ? unload_flag : 0;
-			list = list->pnext_list;
+	while (list) {
+		status = list->pnext_ft->subA(list->pnext_ft , DriverObject , RegistryPath);
+		if (status < 0) {
+			//退出清理
+			hr_ExitCleaner(DriverObject);
+			return unload_flag ? status : 0;
 		}
+		IoRegister_flag = list->pnext_ft->v_10 ? 1 : IoRegister_flag;
+		unload_flag = list->pnext_ft->subB ? unload_flag : 0;
+		list = list->pnext_list;
 	}
+
+
 
 	for (int i = 0; i < 28; i++) {
 		DriverObject->MajorFunction[i] = hr_driver_dispatch;

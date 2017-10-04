@@ -82,7 +82,7 @@ typedef struct _INIT_LIST INIT_LIST , *PINIT_LIST;
 typedef struct _INIT_FUNTABLE INIT_FUNTABLE , *PINIT_FUNTABLE;
 
 
-typedef NTSTATUS(__stdcall *psubA)(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
+typedef NTSTATUS(__stdcall *psubA)(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);
 typedef void(__stdcall *psubB)();
 typedef char(__stdcall *psubC)(void   *a1 , long long a2);
 typedef struct _INIT_FUNTABLE {
@@ -107,8 +107,8 @@ typedef struct _INIT_MEMOBJECT {
 	USHORT  Length_b;       //  0x12
 	int     i_14;           //  0x14
 	void*   memptr;         //  0x18
-	void*   Object;         //  0x20
-	void*   v_28;           //  0x28
+	PDEVICE_OBJECT   ActMonDeviceObject;         //  0x20
+	PDEVICE_OBJECT   DTrampoDeviceObject;        //  0x28
 	int     i_30;           //  0x30
 	int     i_34;           //  0x34
 	void*   v_38;           //  0x38
