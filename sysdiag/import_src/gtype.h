@@ -84,12 +84,15 @@ typedef struct _INIT_FUNTABLE INIT_FUNTABLE , *PINIT_FUNTABLE;
 
 typedef NTSTATUS(__stdcall *psubA)(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);
 typedef void(__stdcall *psubB)();
-typedef char(__stdcall *psubC)(void   *a1 , long long a2);
+typedef NTSTATUS(__stdcall *psubC)(void *a1 , void *a2 , long long a3 , int a4);
+typedef char(__stdcall *psubD)(void   *a1 , long long a2);
+typedef NTSTATUS(__stdcall *psubE)(void *a1 , PDRIVER_OBJECT pdriver_object , void *a3);
 typedef struct _INIT_FUNTABLE {
-	psubA	subA;						//	0x00
-	psubB	subB;						//	0x08
-	void*	v_10;						//	0x10
-	psubC	subC;						//	0x18
+	psubA	sub_0;						//	0x00
+	psubB	sub_8;						//	0x08
+	psubC	sub_10;						//	0x10
+	psubD	sub_18;						//	0x18
+	psubE	ArrSub[27];					
 }INIT_FUNTABLE , *PINIT_FUNTABLE;
 
 typedef struct _INIT_LIST {

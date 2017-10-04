@@ -15,6 +15,9 @@ void sub_14003A900();
 char sub_14003AA20(void   *a1 , long long a2);
 
 
+
+NTSTATUS sub_14000E160(void *a1 , PDRIVER_OBJECT pdriver_object , void *a3);
+NTSTATUS sub_14000E250(void *a1 , void *a2 , long long a3 , int a4);
 //************************************************************************************************************
 //	创建作者  :  Tennn
 //  修改时间  :  2017/10/03 19:23
@@ -34,7 +37,7 @@ NTSTATUS hr_SetNoInteractiveServices();
 //  修改时间  :  2017/10/03 23:15
 //	函数功能  :  创建设备对象	sub_14000BBD0
 //************************************************************************************************************
-NTSTATUS sub_14000BBD0(PDRIVER_OBJECT pDriverObject , const WCHAR *u_DeviceName , const WCHAR *u_SymbolicLinkName , PDEVICE_OBJECT pdevice_object);
+NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_DeviceName , const WCHAR *u_SymbolicLinkName , PDEVICE_OBJECT pdevice_object);
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
 char sub_14000D8A0(void *a1 , long long a2);
 

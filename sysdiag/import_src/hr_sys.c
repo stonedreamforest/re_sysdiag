@@ -51,6 +51,14 @@ char sub_14003AA20(void *a1 , long long a2) {
 }
 
 
+NTSTATUS sub_14000E160(void *a1 , PDRIVER_OBJECT pdriver_object , void *a3) {
+	return 0;
+}
+
+NTSTATUS sub_14000E250(void *a1 , void *a2 , long long a3 , int a4) {
+	return 0;
+}
+
 void *hr_AllocatePoolWithTag(POOL_TYPE PoolType , size_t NumberOfBytes , ULONG Tag) {
 	Tag = Tag ? Tag : 0x54646566;
 	void *ptr = ExAllocatePoolWithTag(PoolType , NumberOfBytes , Tag);
@@ -143,13 +151,16 @@ NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , 
 	if (status < 0) {
 		return status;
 	}
-	status = hr_CreateDeviceSecure(pdriver_object , L"\\Device\\HR::DTrampo", L"\\??\\HR::DTrampo", g_init_memob.ActMonDeviceObject);
+	status = hr_CreateDeviceSecure(pdriver_object , L"\\Device\\HR::DTrampo" , L"\\??\\HR::DTrampo" , g_init_memob.ActMonDeviceObject);
 	if (status < 0) {
 		return status;
 	}
+	for (int i = 0; i < 27; i++) {
+		init_ft->ArrSub[i] = sub_14000E160;
+	}
+	init_ft->sub_10 = sub_14000E250;
 
 	return 0;
-
 }
 
 char sub_14000D8A0(void *a1 , long long a2) {

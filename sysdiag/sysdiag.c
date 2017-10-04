@@ -98,14 +98,14 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 	int IoRegister_flag = 0;
 	int unload_flag = 1;
 	while (list) {
-		status = list->pnext_ft->subA(list->pnext_ft , DriverObject , RegistryPath);
+		status = list->pnext_ft->sub_0(list->pnext_ft , DriverObject , RegistryPath);
 		if (status < 0) {
 			//ÍË³öÇåÀí
 			hr_ExitCleaner(DriverObject);
 			return unload_flag ? status : 0;
 		}
-		IoRegister_flag = list->pnext_ft->v_10 ? 1 : IoRegister_flag;
-		unload_flag = list->pnext_ft->subB ? unload_flag : 0;
+		IoRegister_flag = list->pnext_ft->sub_10 ? 1 : IoRegister_flag;
+		unload_flag = list->pnext_ft->sub_8 ? unload_flag : 0;
 		list = list->pnext_list;
 	}
 
