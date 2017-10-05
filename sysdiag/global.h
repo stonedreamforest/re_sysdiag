@@ -5,7 +5,7 @@
 //м╥нд╪Ч
 #include <ndis.h>
 #include <wdmsec.h>
-
+#include <wdm.h>
 
 
 

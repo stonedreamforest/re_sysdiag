@@ -134,6 +134,81 @@ NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_Dev
 	return 0;
 }
 
+NTSTATUS sub_140021CC0() {
+	return 0;
+}
+NTSTATUS sub_14002AF30(PUSHORT length) {
+	return 0;
+}
+NTSTATUS sub_140023970() {
+	return 0;
+}
+NTSTATUS sub_14000A250() {
+	return 0;
+}
+NTSTATUS sub_140019F90() {
+	return 0;
+}
+NTSTATUS sub_140026610() {
+	return 0;
+}
+NTSTATUS sub_1400144F0(PDEVICE_OBJECT pdevice_object , PUSHORT length) {
+	return 0;
+}
+NTSTATUS sub_1400198C0() {
+	return 0;
+}
+NTSTATUS sub_140028290() {
+	return 0;
+}
+NTSTATUS sub_140025130() {
+	return 0;
+}
+NTSTATUS sub_140029210() {
+	return 0;
+}
+NTSTATUS sub_14000F0C0() {
+	return 0;
+}
+NTSTATUS sub_14000F410(void *a1,int a2,const wchar_t *a3,int a4) {
+	return 0;
+}
+NTSTATUS sub_140009B30(void *a1) {
+	return 0;
+}
+NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3) {
+	return 0;
+}
+NTSTATUS sub_1400200B0(PDEVICE_OBJECT pdevice_object , PUSHORT length , int flag) {
+	NTSTATUS status;
+	if (flag) {
+		if (flag != 1) {
+			status = sub_140021CC0();
+			if (status < 0) {
+				return status;
+			}
+			dword_14005AFA8[6] = 1;
+		}
+		goto loc_1400202A2;
+	}
+	for (int i = 0; i < 5; i++) {
+		g_init_kevent[i].l_8 = 0;
+		g_init_kevent[i].l_10 = 1;
+		g_init_kevent[i].l_18 = 0;
+		g_init_kevent[i].i_20 = 0;
+		KeInitializeEvent(&g_init_kevent[i].kevent , SynchronizationEvent , FALSE);
+	}
+	ExInitializeNPagedLookasideList(&g_np_lkaside[0] , 0 , 0 , 0 , 0x40ui64 , 0x54697464u , 0);
+	ExInitializeNPagedLookasideList(&g_np_lkaside[1] , 0 , 0 , 0 , 0x18ui64 , 0x5462706Cu , 0);
+	ExInitializeNPagedLookasideList(&g_np_lkaside[2] , 0 , 0 , 0 , 0x78ui64 , 0x54706C6Cu , 0);
+
+loc_1400202A2:
+	return 0;
+}
+NTSTATUS sub_140020350(int flag) {
+	return 0;
+}
+
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
 	if ((USHORT) NtBuildNumber < 0xa28) {
 		return 0xC00000BB;
@@ -159,8 +234,10 @@ NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , 
 		init_ft->ArrSub[i] = sub_14000E160;
 	}
 	init_ft->sub_10 = sub_14000E250;
-
-	return 0;
+	if (sub_1400200B0(g_init_memob.ActMonDeviceObject , &g_init_memob.Length_a , 0) < 0) {
+		return 0x0C0000001;
+	}
+	return sub_140020350(0);
 }
 
 char sub_14000D8A0(void *a1 , long long a2) {

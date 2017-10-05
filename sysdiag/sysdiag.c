@@ -13,6 +13,7 @@
 
 
 
+
 //************************************************************************************************************
 //	创建作者  :  Tennn
 //  修改时间  :  2017/10/03 19:23
@@ -27,6 +28,7 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 #else
 	PRINT_INFO;
 #endif // DBG
+	
 
 	//	不支持xp以下版本
 	if ((USHORT) NtBuildNumber < 0xa28) {

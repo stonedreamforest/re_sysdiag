@@ -4,13 +4,13 @@
 
 
 
-NTSTATUS sub_14003C0D0(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
+NTSTATUS sub_14003C0D0(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);
 NTSTATUS sub_14003C0A0();
 char sub_14003C170(void   *a1 , long long a2);
-NTSTATUS sub_140038E30(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
+NTSTATUS sub_140038E30(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);
 NTSTATUS sub_140038E00();
 char sub_140038EC0(void   *a1 , long long a2);
-NTSTATUS sub_14003A930(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
+NTSTATUS sub_14003A930(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);
 void sub_14003A900();
 char sub_14003AA20(void   *a1 , long long a2);
 
@@ -38,7 +38,24 @@ NTSTATUS hr_SetNoInteractiveServices();
 //	函数功能  :  创建设备对象	sub_14000BBD0
 //************************************************************************************************************
 NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_DeviceName , const WCHAR *u_SymbolicLinkName , PDEVICE_OBJECT pdevice_object);
-NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object, PUNICODE_STRING RegistryPath);
+NTSTATUS sub_140021CC0();
+NTSTATUS sub_14002AF30(PUSHORT length);
+NTSTATUS sub_140023970() ;
+NTSTATUS sub_14000A250() ;
+NTSTATUS sub_140019F90() ;
+NTSTATUS sub_140026610();
+NTSTATUS sub_1400144F0(PDEVICE_OBJECT pdevice_object , PUSHORT length) ;
+NTSTATUS sub_1400198C0();
+NTSTATUS sub_140028290();
+NTSTATUS sub_140025130();
+NTSTATUS sub_140029210() ;
+NTSTATUS sub_14000F0C0();
+NTSTATUS sub_14000F410(void *a1 , int a2 , const wchar_t *a3 , int a4);
+NTSTATUS sub_140009B30(void *a1);
+NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3);
+NTSTATUS sub_1400200B0(PDEVICE_OBJECT pdevice_object , PUSHORT length , int flag);
+NTSTATUS sub_140020350(int flag);
+NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);
 char sub_14000D8A0(void *a1 , long long a2);
 
 

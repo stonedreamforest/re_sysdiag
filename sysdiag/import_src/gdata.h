@@ -51,3 +51,19 @@ extern INIT_FUNTABLE	g_init_ftD;
 extern SYSDIAG g_sysdiag;
 extern INIT_MEMOBJECT g_init_memob;
 
+
+
+extern int dword_14005AFA8[];
+
+extern INIT_KEVENT g_init_kevent[];
+
+
+
+
+
+
+
+
+
+extern int dword_14005AFA8[];
+extern NPAGED_LOOKASIDE_LIST g_np_lkaside[];

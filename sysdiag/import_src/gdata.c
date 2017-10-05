@@ -85,11 +85,13 @@ INIT_MEMOBJECT g_init_memob = { 0 };
 
 
 
+int dword_14005AFA8[12];
 
 
 
+INIT_KEVENT g_init_kevent[5];
 
 
 
-
-
+extern int dword_14005AFA8[12];
+extern NPAGED_LOOKASIDE_LIST g_np_lkaside[] = {0};

@@ -3,6 +3,7 @@
 
 
 
+
 typedef struct NRL_FLAG {
 	char flag_0;    //  0x00
 	char flag_1;    //  0x01
@@ -123,4 +124,16 @@ typedef struct _INIT_MEMOBJECT {
 
 
 
+
+typedef struct _INIT_KEVENT {
+	int i_0;				//	0x00
+	int i_4;				//	0x04
+	long long l_8;			//	0x08
+	long long l_10;			//	0x10
+	long long l_18;			//	0x18
+	int i_1c;				//	0x1c
+	int i_20;				//	0x20
+	KEVENT kevent;			//	0x28	size:0x18
+	char buf[0x50 - 0x40];	
+}INIT_KEVENT , *PINIT_KEVENT;
 
