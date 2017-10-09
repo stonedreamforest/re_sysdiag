@@ -137,3 +137,13 @@ typedef struct _INIT_KEVENT {
 	char buf[0x50 - 0x40];	
 }INIT_KEVENT , *PINIT_KEVENT;
 
+
+
+typedef struct _STRC_140059950 {
+	long long l_0;                      //  0x00
+	long long l_8;                      //  0x08
+	long long l_10;                     //  0x10
+	long long l_18;                     //  0x18
+	NDIS_RW_LOCK ndis_rw_lock_20;		//  0x20    size:0x410
+	char buf430[0x48];
+}STRC_140059950 , *PSTRC_140059950;

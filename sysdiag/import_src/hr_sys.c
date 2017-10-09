@@ -170,7 +170,7 @@ NTSTATUS sub_140029210() {
 NTSTATUS sub_14000F0C0() {
 	return 0;
 }
-NTSTATUS sub_14000F410(void *a1,int a2,const wchar_t *a3,int a4) {
+NTSTATUS sub_14000F410(void *a1 , int size , const wchar_t *a3 , int a4) {
 	return 0;
 }
 NTSTATUS sub_140009B30(void *a1) {
@@ -181,6 +181,7 @@ NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3) {
 }
 NTSTATUS sub_1400200B0(PDEVICE_OBJECT pdevice_object , PUSHORT length , int flag) {
 	NTSTATUS status;
+	char buf[0x40];
 	if (flag) {
 		if (flag != 1) {
 			status = sub_140021CC0();
@@ -201,9 +202,72 @@ NTSTATUS sub_1400200B0(PDEVICE_OBJECT pdevice_object , PUSHORT length , int flag
 	ExInitializeNPagedLookasideList(&g_np_lkaside[0] , 0 , 0 , 0 , 0x40ui64 , 0x54697464u , 0);
 	ExInitializeNPagedLookasideList(&g_np_lkaside[1] , 0 , 0 , 0 , 0x18ui64 , 0x5462706Cu , 0);
 	ExInitializeNPagedLookasideList(&g_np_lkaside[2] , 0 , 0 , 0 , 0x78ui64 , 0x54706C6Cu , 0);
-
+	sub_14002AF30(length);
+	if (sub_140023970() < 0) {
+		return 0x0C0000001;
+	}
+	dword_14005AFA8[0] = 1;
+	if (sub_14000A250()) {
+		return 0x0C0000001;
+	}
+	dword_14005AFA8[10] = 1;
+	if (sub_140019F90() < 0) {
+		return 0x0C0000001;
+	}
+	dword_14005AFA8[1] = 1;
+	if (sub_140026610() >= 0) {
+		dword_14005AFA8[2] = 1;
+	}
+	status = sub_1400144F0(pdevice_object , length);
+	if (status < 0) {
+		return status;
+	}
+	dword_14005AFA8[3] = 1;
+	status = sub_1400198C0();
+	if (status < 0) {
+		return status;
+	}
+	dword_14005AFA8[7] = 1;
+	status = sub_140028290();
+	if (status < 0) {
+		return status;
+	}
+	dword_14005AFA8[5] = 1;
+	status = sub_140025130();
+	if (status < 0) {
+		return status;
+	}
+	dword_14005AFA8[4] = 1;
+	status = sub_140029210();
+	if (status < 0) {
+		return status;
+	}
+	dword_14005AFA8[8] = 1;
+	status = sub_14000F0C0();
+	if (status < 0) {
+		return status;
+	}
+	dword_14005AFA8[9] = 1;
 loc_1400202A2:
-	return 0;
+	status = 0;
+	for (int i = 0; i < 5; i++) {
+		if (flag) {
+			if (flag == 1 && i != 4) {
+				continue;
+			}
+		} else {
+			if (i == 4) {
+				continue;
+			}
+		}
+
+		sub_14000F410(buf , 0x40 , L"\\HR::ActMon_%d" , 0);
+		if (sub_140009B30(&strc_140059950) < 0 || sub_14000A290(&g_sysdiag.buf12c[0x1c] , &strc_140059950 , buf) < 0) {
+			status = 0x0C0000001;
+			break;
+		}
+	}
+	return status;
 }
 NTSTATUS sub_140020350(int flag) {
 	return 0;

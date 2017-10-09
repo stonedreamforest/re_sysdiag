@@ -50,9 +50,14 @@ NTSTATUS sub_140028290();
 NTSTATUS sub_140025130();
 NTSTATUS sub_140029210() ;
 NTSTATUS sub_14000F0C0();
-NTSTATUS sub_14000F410(void *a1 , int a2 , const wchar_t *a3 , int a4);
+NTSTATUS sub_14000F410(void *a1 , int size , const wchar_t *a3 , int a4);
 NTSTATUS sub_140009B30(void *a1);
 NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3);
+//************************************************************************************************************
+//	创建作者  :  Tennn
+//  修改时间  :  2017/10/09 20:49
+//	函数功能  :  初始化函数 sub_1400200B0
+//************************************************************************************************************
 NTSTATUS sub_1400200B0(PDEVICE_OBJECT pdevice_object , PUSHORT length , int flag);
 NTSTATUS sub_140020350(int flag);
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath);

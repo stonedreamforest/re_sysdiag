@@ -66,4 +66,7 @@ extern INIT_KEVENT g_init_kevent[];
 
 
 extern int dword_14005AFA8[];
-extern NPAGED_LOOKASIDE_LIST g_np_lkaside[];
+extern  NPAGED_LOOKASIDE_LIST g_np_lkaside[];
+
+
+extern STRC_140059950 strc_140059950;
