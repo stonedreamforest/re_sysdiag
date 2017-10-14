@@ -134,8 +134,16 @@ NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_Dev
 	return 0;
 }
 
+
 NTSTATUS sub_140021380() {
-	return 0;
+	strc_14005b708.l_0 = 0;
+	strc_14005b708.l_8 = 0;
+	NTSTATUS status = sub_140009B30(&stru_14005b290);
+	if (status < 0) {
+		return status;
+	}
+	status = sub_14000A290(g_sysdiag.field_148 , &stru_14005b290 , L"\\HR::NetFlood");
+	return status < 0 ? status : 0;
 }
 void sub_140021960() {
 
@@ -159,8 +167,7 @@ NTSTATUS sub_140020E00(void *a1 , int a2) {
 	return 0;
 }
 
-void hr_XPIoGetDeviceObjectPointer()
-{
+void hr_XPIoGetDeviceObjectPointer() {
 	UNICODE_STRING DestinationString;
 	PFILE_OBJECT FileObject;
 	PDEVICE_OBJECT DeviceObject;
@@ -257,7 +264,7 @@ NTSTATUS sub_14000F0C0() {
 NTSTATUS sub_14000F410(void *a1 , int size , const wchar_t *a3 , int a4) {
 	return 0;
 }
-NTSTATUS sub_140009B30(void *a1) {
+NTSTATUS sub_140009B30(STRU_14005B290 *loc_14005b290) {
 	return 0;
 }
 NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3) {
@@ -347,7 +354,7 @@ loc_1400202A2:
 		}
 
 		sub_14000F410(buf , 0x40 , L"\\HR::ActMon_%d" , 0);
-		if (sub_140009B30(&strc_140059950) < 0 || sub_14000A290(&g_sysdiag.buf12c[0x1c] , &strc_140059950 , buf) < 0) {
+		if (sub_140009B30(&strc_140059950) < 0 || sub_14000A290(g_sysdiag.field_148 , &strc_140059950 , buf) < 0) {
 			status = 0x0C0000001;
 			break;
 		}

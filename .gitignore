@@ -70,3 +70,8 @@ sysdiag/x64/Debug/sysdiag.inf
 *.filters
 *.filters
 hr_test/hr_test.vcxproj
+*.asm
+.vs/re_sysdiag/v14/.suo
+hr_test/hr_test.cpp
+hr_test/hr_test.vcxproj
+*.filters

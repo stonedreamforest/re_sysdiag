@@ -71,7 +71,7 @@ NTSTATUS sub_140025130();
 NTSTATUS sub_140029210() ;
 NTSTATUS sub_14000F0C0();
 NTSTATUS sub_14000F410(void *a1 , int size , const wchar_t *a3 , int a4);
-NTSTATUS sub_140009B30(void *a1);
+NTSTATUS sub_140009B30(STRU_14005B290 *loc_14005b290);
 NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3);
 //************************************************************************************************************
 //	创建作者  :  Tennn
