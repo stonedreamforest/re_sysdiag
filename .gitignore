@@ -64,3 +64,5 @@ x64/Debug/sysdiag/sysdiag.inf
 x64/Debug/sysdiag.inf
 sysdiag/x64/Debug/sysdiag.inf
 *.log
+.vs/re_sysdiag/v14/.suo
+*.i64

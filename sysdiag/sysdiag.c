@@ -28,10 +28,10 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 #else
 	PRINT_INFO;
 #endif // DBG
-	
+
 
 	//	不支持xp以下版本
-	if ((USHORT) NtBuildNumber < 0xa28) {
+	if ((USHORT)NtBuildNumber < 0xa28) {
 		return 0xC00000BB;
 	}
 
@@ -57,7 +57,7 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 	//初始化6个读写锁
 	//初始化2个资源变量。
 	g_sysdiag.rtl_osversioninfoexw.dwOSVersionInfoSize = sizeof(RTL_OSVERSIONINFOEXW);
-	if (RtlGetVersion((PRTL_OSVERSIONINFOW) &g_sysdiag.rtl_osversioninfoexw) < 0)
+	if (RtlGetVersion((PRTL_OSVERSIONINFOW)&g_sysdiag.rtl_osversioninfoexw) < 0)
 		return 0xC0000001;
 	NdisInitializeReadWriteLock(&g_sysdiag.ndis_rw_lock_168);
 	g_sysdiag.nrl_flag_160.flag_0 |= 3u;
@@ -120,7 +120,7 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 		DriverObject->DriverUnload = hr_driver_unload;
 	}
 	if (IoRegister_flag) {
-		IoRegisterBootDriverReinitialization(DriverObject , hr_BootDriverReinitialization , (PVOID) 0x424F4F54);
+		IoRegisterBootDriverReinitialization(DriverObject , hr_BootDriverReinitialization , (PVOID)0x424F4F54);
 		IoRegisterDriverReinitialization(DriverObject , hr_DriverReinitialization , NULL);
 	}
 	g_sysdiag.ppdriver_object_0 = NULL;

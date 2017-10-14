@@ -134,8 +134,52 @@ NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_Dev
 	return 0;
 }
 
-NTSTATUS sub_140021CC0() {
+NTSTATUS sub_140021380() {
 	return 0;
+}
+void sub_140021960() {
+
+}
+NTSTATUS sub_14001AF00() {
+	return 0;
+}
+NTSTATUS sub_140034090() {
+	return 0;
+}
+void sub_140021370() {
+
+}
+void sub_14001AEF0() {
+
+}
+NTSTATUS sub_140020CB0() {
+	return 0;
+}
+NTSTATUS sub_140021A60() 	{
+	return 0;
+}
+NTSTATUS sub_140021CC0() {
+	ExInitializeNPagedLookasideList(&strc_14005b708.np_lks_lt_38 , 0i64 , 0i64 , 0 , 0x4E0ui64 , 0x546E6D69u , 0);
+	if (sub_140021A60() < 0) {
+		return 0x0C0000001;
+	}
+	if (sub_140021380() < 0) {
+		sub_140021960();
+		return 0x0C0000001;
+	}
+	if (sub_14001AF00() < 0) {
+		sub_140021960();
+		sub_140021370();
+		return 0x0C0000001;
+	}
+	NTSTATUS status = sub_140034090();
+	if (status < 0) {
+		return status;
+	}
+	sub_140021960();
+	sub_140021370();
+	sub_14001AEF0();
+	return status;
 }
 NTSTATUS sub_14002AF30(PUSHORT length) {
 	return 0;
@@ -255,7 +299,8 @@ loc_1400202A2:
 			if (flag == 1 && i != 4) {
 				continue;
 			}
-		} else {
+		}
+		else {
 			if (i == 4) {
 				continue;
 			}
@@ -274,7 +319,7 @@ NTSTATUS sub_140020350(int flag) {
 }
 
 NTSTATUS sub_14000D710(PINIT_FUNTABLE init_ft , PDRIVER_OBJECT pdriver_object , PUNICODE_STRING RegistryPath) {
-	if ((USHORT) NtBuildNumber < 0xa28) {
+	if ((USHORT)NtBuildNumber < 0xa28) {
 		return 0xC00000BB;
 	}
 	void *ptr = hr_AllocatePoolWithTag(0 , RegistryPath->Length , 0);

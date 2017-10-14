@@ -106,7 +106,7 @@ typedef struct _INIT_LIST {
 
 typedef struct _INIT_MEMOBJECT {
 	void*   v_0;            //  0x00
-	PKSPIN_LOCK SpinLock;   //  0x08
+	KSPIN_LOCK SpinLock;    //  0x08
 	USHORT  Length_a;       //  0x10
 	USHORT  Length_b;       //  0x12
 	int     i_14;           //  0x14
@@ -147,3 +147,13 @@ typedef struct _STRC_140059950 {
 	NDIS_RW_LOCK ndis_rw_lock_20;		//  0x20    size:0x410
 	char buf430[0x48];
 }STRC_140059950 , *PSTRC_140059950;
+
+
+
+
+
+typedef struct _STRC_14005B708 {
+	char buf[0x38];
+	NPAGED_LOOKASIDE_LIST   np_lks_lt_38;
+	char    buf118[0x178 - 0XB0];
+}STRC_14005B708 , *PSTRC_14005B708;

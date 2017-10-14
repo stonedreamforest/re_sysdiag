@@ -38,6 +38,19 @@ NTSTATUS hr_SetNoInteractiveServices();
 //	函数功能  :  创建设备对象	sub_14000BBD0
 //************************************************************************************************************
 NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_DeviceName , const WCHAR *u_SymbolicLinkName , PDEVICE_OBJECT pdevice_object);
+NTSTATUS sub_140021380();
+void sub_140021960();
+NTSTATUS sub_14001AF00();
+NTSTATUS sub_140034090();
+void sub_140021370();
+void sub_14001AEF0();
+NTSTATUS sub_140020CB0();
+NTSTATUS sub_140021A60();
+//************************************************************************************************************
+//	创建作者  :  Tennn
+//  修改时间  :  2017/10/14 15:03
+//	函数功能  :  sub_140021CC0
+//************************************************************************************************************
 NTSTATUS sub_140021CC0();
 NTSTATUS sub_14002AF30(PUSHORT length);
 NTSTATUS sub_140023970() ;

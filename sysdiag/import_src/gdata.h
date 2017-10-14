@@ -70,3 +70,5 @@ extern  NPAGED_LOOKASIDE_LIST g_np_lkaside[];
 
 
 extern STRC_140059950 strc_140059950;
+
+extern STRC_14005B708 strc_14005b708;
