@@ -75,3 +75,6 @@ hr_test/hr_test.vcxproj
 hr_test/hr_test.cpp
 hr_test/hr_test.vcxproj
 *.filters
+.vs/re_sysdiag/v14/.suo
+*.dat
+.vs/re_sysdiag/v14/.suo
