@@ -153,7 +153,9 @@ typedef struct _STRC_140059950 {
 
 
 typedef struct _STRC_14005B708 {
-	char buf[0x38];
+	char buf[0x20];
+	long long l_20;
+	char buf28[0x38 - 0x28];
 	NPAGED_LOOKASIDE_LIST   np_lks_lt_38;
-	char    buf118[0x178 - 0XB0];
+	char    buf118[0x178 - 0XB8];
 }STRC_14005B708 , *PSTRC_14005B708;

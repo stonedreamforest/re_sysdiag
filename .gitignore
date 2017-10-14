@@ -66,3 +66,7 @@ sysdiag/x64/Debug/sysdiag.inf
 *.log
 .vs/re_sysdiag/v14/.suo
 *.i64
+*.vcxproj
+*.filters
+*.filters
+hr_test/hr_test.vcxproj

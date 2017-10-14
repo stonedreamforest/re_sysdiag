@@ -152,10 +152,50 @@ void sub_140021370() {
 void sub_14001AEF0() {
 
 }
-NTSTATUS sub_140020CB0() {
+NTSTATUS sub_140020D80(void *a1 , int a2) {
 	return 0;
 }
-NTSTATUS sub_140021A60() 	{
+NTSTATUS sub_140020E00(void *a1 , int a2) {
+	return 0;
+}
+
+void hr_XPIoGetDeviceObjectPointer()
+{
+	UNICODE_STRING DestinationString;
+	PFILE_OBJECT FileObject;
+	PDEVICE_OBJECT DeviceObject;
+
+	//windows 7 ртио╟Ф╠╬
+	if ((USHORT)NtBuildNumber >= 0x1DB0) {
+		return;
+	}
+	RtlInitUnicodeString(&DestinationString , L"\\Device\\HRFwDrv");
+	if (IoGetDeviceObjectPointer(&DestinationString , 0x1F01FFu , &FileObject , &DeviceObject) < 0) {
+		return;
+	}
+	ObfDereferenceObject(FileObject);
+	if (!DeviceObject->DeviceExtension) {	// 0x40
+		return;
+	}
+	typedef NTSTATUS(__stdcall *psub)(void *a1 , int a2);
+	typedef NTSTATUS(__stdcall *pde_sub)(int zero , psub sub);
+	typedef struct _CUS_DEVICEEXTENSION {
+		long long l_0;	//	0x00
+		int		i_8;	//	0x08
+		pde_sub	sub_c;	//	0x0c
+		pde_sub	sub_14;	//	0x14
+	}CUS_DEVICEEXTENSION , *PCUS_DEVICEEXTENSION;
+	PCUS_DEVICEEXTENSION DeviceExtension = (PCUS_DEVICEEXTENSION)DeviceObject->DeviceExtension;
+	if (DeviceExtension->l_0 != 0x5652445746524821 || DeviceExtension->i_8 != 0) {
+		return;
+	}
+	DeviceExtension->sub_c(0 , sub_140020D80);
+	DeviceExtension->sub_14(0 , sub_140020E00);
+	return;
+}
+NTSTATUS sub_140021A60() {
+	hr_XPIoGetDeviceObjectPointer();
+	strc_14005b708.l_20 = 0;
 	return 0;
 }
 NTSTATUS sub_140021CC0() {
@@ -173,8 +213,8 @@ NTSTATUS sub_140021CC0() {
 		return 0x0C0000001;
 	}
 	NTSTATUS status = sub_140034090();
-	if (status < 0) {
-		return status;
+	if (status >= 0) {
+		return 0;
 	}
 	sub_140021960();
 	sub_140021370();
