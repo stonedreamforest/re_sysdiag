@@ -138,7 +138,7 @@ NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_Dev
 NTSTATUS sub_140021380() {
 	strc_14005b708.l_0 = 0;
 	strc_14005b708.l_8 = 0;
-	NTSTATUS status = sub_140009B30(&stru_14005b290);
+	NTSTATUS status = hr_CreateThread(&stru_14005b290[0]);
 	if (status < 0) {
 		return status;
 	}
@@ -264,9 +264,51 @@ NTSTATUS sub_14000F0C0() {
 NTSTATUS sub_14000F410(void *a1 , int size , const wchar_t *a3 , int a4) {
 	return 0;
 }
-NTSTATUS sub_140009B30(STRU_14005B290 *loc_14005b290) {
-	return 0;
+
+VOID ThreadStart(_In_ PVOID StartContext) {
+
 }
+
+NTSTATUS hr_CreateThread(STRU_14005B290 *loc_14005b290) {
+	NTSTATUS status;
+	HANDLE ThreadHandle;
+	OBJECT_ATTRIBUTES ObjectAttributes;
+
+	memset(loc_14005b290 , 0 , sizeof(STRU_14005B290));
+	loc_14005b290->field_438 = 0;
+	KeInitializeEvent(&loc_14005b290->kevent_440 , SynchronizationEvent , 0);
+	loc_14005b290->field_468 = &loc_14005b290->field_468;
+	loc_14005b290->field_470 = &loc_14005b290->field_468;
+	loc_14005b290->field_10 &= 0xfd;
+	loc_14005b290->field_10 = (loc_14005b290->field_10 & 0xFE) | (ExInitializeResourceLite(&loc_14005b290->Resource_18) >= 0);
+	if (!(loc_14005b290->field_10 & 1)) {
+		return 0x0FFFFFFF2;
+	}
+#if 0
+	ObjectAttributes.Length = sizeof(OBJECT_ATTRIBUTES);	//	0x30
+	ObjectAttributes.ObjectName = &DestinationString;
+	ObjectAttributes.RootDirectory = 0i64;
+	ObjectAttributes.Attributes = 0x200;
+	ObjectAttributes.SecurityDescriptor = NULL;
+#else
+	InitializeObjectAttributes(&ObjectAttributes ,
+							   NULL ,
+							   0x200 ,
+							   NULL ,
+							   NULL);
+#endif
+	if (PsCreateSystemThread(&ThreadHandle , 0x1FFFFF , &ObjectAttributes , 0 , 0 , ThreadStart , loc_14005b290) < 0) {
+		return 0xFFFFFFF2;
+	}
+	if (ObReferenceObjectByHandle(ThreadHandle , 0x1FFFFFu , PsThreadType[0] , 0 , (PVOID *)&loc_14005b290->object_458 , 0i64) < 0) {
+		_InterlockedIncrement(&loc_14005b290->field_460);
+		KeSetEvent(&loc_14005b290->kevent_440 , 0 , 0);
+		status = 0x0FFFFFFF2;
+	}
+	ZwClose(ThreadHandle);
+	return status;
+}
+
 NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3) {
 	return 0;
 }
@@ -354,7 +396,7 @@ loc_1400202A2:
 		}
 
 		sub_14000F410(buf , 0x40 , L"\\HR::ActMon_%d" , 0);
-		if (sub_140009B30(&strc_140059950) < 0 || sub_14000A290(g_sysdiag.field_148 , &strc_140059950 , buf) < 0) {
+		if (hr_CreateThread(&strc_140059950[0]) < 0 || sub_14000A290(g_sysdiag.field_148 , &strc_140059950 , buf) < 0) {
 			status = 0x0C0000001;
 			break;
 		}

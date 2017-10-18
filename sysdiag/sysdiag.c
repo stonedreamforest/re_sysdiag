@@ -29,7 +29,7 @@ NTSTATUS DriverEntry(_In_ PDRIVER_OBJECT  DriverObject , _In_ PUNICODE_STRING Re
 	PRINT_INFO;
 #endif // DBG
 
-	
+
 	//	不支持xp以下版本
 	if ((USHORT)NtBuildNumber < 0xa28) {
 		return 0xC00000BB;

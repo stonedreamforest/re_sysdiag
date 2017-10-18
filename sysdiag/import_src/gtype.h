@@ -142,12 +142,22 @@ typedef struct _INIT_KEVENT {
 
 
 typedef struct _STRC_140059950 {
-	long long l_0;                      //  0x00
-	long long l_8;                      //  0x08
-	long long l_10;                     //  0x10
-	long long l_18;                     //  0x18
-	NDIS_RW_LOCK ndis_rw_lock_20;		//  0x20    size:0x410
-	char buf430[0x48];
+	__int64 field_0;
+	__int64 field_8;
+	char field_10;
+	char field_11;
+	char field_12;
+	char field_13;
+	int field_14;
+	ERESOURCE Resource_18;
+	char buf_80[952];
+	__int64 field_438;
+	KEVENT kevent_440;
+	__int64 object_458;
+	int field_460;
+	int field_464;
+	void* field_468;
+	void* field_470;
 }STRC_140059950 , *PSTRC_140059950 ,
 STRU_14005B290;
 
