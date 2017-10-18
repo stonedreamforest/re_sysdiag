@@ -149,7 +149,7 @@ typedef struct _STRC_140059950 {
 	char field_12;
 	char field_13;
 	int field_14;
-	ERESOURCE Resource_18;
+	ERESOURCE Resource_18;	//此处可能是大小为0x420的联合体
 	char buf_80[952];
 	__int64 field_438;
 	KEVENT kevent_440;
