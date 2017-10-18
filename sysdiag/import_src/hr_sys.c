@@ -269,19 +269,19 @@ VOID ThreadStart(_In_ PVOID StartContext) {
 
 }
 
-NTSTATUS hr_CreateThread(STRU_14005B290 *loc_14005b290) {
+NTSTATUS hr_CreateThread(STRU_14005B290 *ThreadContext) {
 	NTSTATUS status;
 	HANDLE ThreadHandle;
 	OBJECT_ATTRIBUTES ObjectAttributes;
 
-	memset(loc_14005b290 , 0 , sizeof(STRU_14005B290));
-	loc_14005b290->field_438 = 0;
-	KeInitializeEvent(&loc_14005b290->kevent_440 , SynchronizationEvent , 0);
-	loc_14005b290->field_468 = &loc_14005b290->field_468;
-	loc_14005b290->field_470 = &loc_14005b290->field_468;
-	loc_14005b290->field_10 &= 0xfd;
-	loc_14005b290->field_10 = (loc_14005b290->field_10 & 0xFE) | (ExInitializeResourceLite(&loc_14005b290->Resource_18) >= 0);
-	if (!(loc_14005b290->field_10 & 1)) {
+	memset(ThreadContext , 0 , sizeof(STRU_14005B290));
+	ThreadContext->field_438 = 0;
+	KeInitializeEvent(&ThreadContext->kevent_440 , SynchronizationEvent , 0);
+	ThreadContext->field_468 = &ThreadContext->field_468;
+	ThreadContext->field_470 = &ThreadContext->field_468;
+	ThreadContext->field_10 &= 0xfd;
+	ThreadContext->field_10 = (ThreadContext->field_10 & 0xFE) | (ExInitializeResourceLite(&ThreadContext->Resource_18) >= 0);
+	if (!(ThreadContext->field_10 & 1)) {
 		return 0x0FFFFFFF2;
 	}
 #if 0
@@ -297,12 +297,12 @@ NTSTATUS hr_CreateThread(STRU_14005B290 *loc_14005b290) {
 							   NULL ,
 							   NULL);
 #endif
-	if (PsCreateSystemThread(&ThreadHandle , 0x1FFFFF , &ObjectAttributes , 0 , 0 , ThreadStart , loc_14005b290) < 0) {
+	if (PsCreateSystemThread(&ThreadHandle , 0x1FFFFF , &ObjectAttributes , 0 , 0 , ThreadStart , ThreadContext) < 0) {
 		return 0xFFFFFFF2;
 	}
-	if (ObReferenceObjectByHandle(ThreadHandle , 0x1FFFFFu , PsThreadType[0] , 0 , (PVOID *)&loc_14005b290->object_458 , 0i64) < 0) {
-		_InterlockedIncrement(&loc_14005b290->field_460);
-		KeSetEvent(&loc_14005b290->kevent_440 , 0 , 0);
+	if (ObReferenceObjectByHandle(ThreadHandle , 0x1FFFFFu , PsThreadType[0] , 0 , (PVOID *)&ThreadContext->object_458 , 0i64) < 0) {
+		_InterlockedIncrement(&ThreadContext->field_460);
+		KeSetEvent(&ThreadContext->kevent_440 , 0 , 0);
 		status = 0x0FFFFFFF2;
 	}
 	ZwClose(ThreadHandle);
