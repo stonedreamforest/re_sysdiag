@@ -138,11 +138,11 @@ NTSTATUS hr_CreateDeviceSecure(PDRIVER_OBJECT pDriverObject , const WCHAR *u_Dev
 NTSTATUS sub_140021380() {
 	strc_14005b708.l_0 = 0;
 	strc_14005b708.l_8 = 0;
-	NTSTATUS status = hr_CreateThread(&stru_14005b290[0]);
+	NTSTATUS status = hr_CreateThread(&g_ThreadContext);
 	if (status < 0) {
 		return status;
 	}
-	status = sub_14000A290(g_sysdiag.field_148 , &stru_14005b290 , L"\\HR::NetFlood");
+	status = sub_14000A290(g_sysdiag.field_148 , &g_ThreadContext , L"\\HR::NetFlood");
 	return status < 0 ? status : 0;
 }
 void sub_140021960() {

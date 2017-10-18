@@ -71,5 +71,5 @@ extern  NPAGED_LOOKASIDE_LIST g_np_lkaside[];
 
 extern STRC_140059950 strc_140059950[];
 
-extern STRU_14005B290 stru_14005b290[];
+extern STRU_14005B290 g_ThreadContext;	//14005B290
 extern STRC_14005B708 strc_14005b708;
