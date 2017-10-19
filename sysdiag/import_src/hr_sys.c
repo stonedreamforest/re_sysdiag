@@ -270,7 +270,6 @@ VOID ThreadStart(_In_ PVOID StartContext) {
 }
 
 NTSTATUS hr_CreateThread(STRU_14005B290 *ThreadContext) {
-	NTSTATUS status;
 	HANDLE ThreadHandle;
 	OBJECT_ATTRIBUTES ObjectAttributes;
 
@@ -303,10 +302,10 @@ NTSTATUS hr_CreateThread(STRU_14005B290 *ThreadContext) {
 	if (ObReferenceObjectByHandle(ThreadHandle , 0x1FFFFFu , PsThreadType[0] , 0 , (PVOID *)&ThreadContext->object_458 , 0i64) < 0) {
 		_InterlockedIncrement(&ThreadContext->field_460);
 		KeSetEvent(&ThreadContext->kevent_440 , 0 , 0);
-		status = 0x0FFFFFFF2;
+		return 0x0FFFFFFF2;
 	}
 	ZwClose(ThreadHandle);
-	return status;
+	return 0;
 }
 
 NTSTATUS sub_14000A290(void *a1 , void *a2 , void *a3) {
