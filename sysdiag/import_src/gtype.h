@@ -151,13 +151,13 @@ typedef struct _STRC_140059950 {
 	int field_14;
 	ERESOURCE Resource_18;	//此处可能是大小为0x420的联合体
 	char buf_80[952];
-	__int64 field_438;
+	KSPIN_LOCK SpinLock_438;
 	KEVENT kevent_440;
 	__int64 object_458;
 	int field_460;
 	int field_464;
-	void* field_468;
-	void* field_470;
+	void** field_468;
+	void** field_470;
 }STRC_140059950 , *PSTRC_140059950 ,
 STRU_14005B290;
 

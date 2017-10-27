@@ -264,8 +264,96 @@ NTSTATUS sub_14000F0C0() {
 NTSTATUS sub_14000F410(void *a1 , int size , const wchar_t *a3 , int a4) {
 	return 0;
 }
-
+void hr_ExFreePoolWithTag(void *mem , int tag) {
+	if (!tag) {
+		tag = 0x54646566;
+	}
+	ExFreePoolWithTag(mem , tag);
+}
+NTSTATUS sub_140008FF0(STRU_14005B290 *context ,
+					   void *a2 ,
+					   void *a3 ,
+					   int a4 ,
+					   size_t a5 ,
+					   size_t a6 ,
+					   void *a8 ,
+					   void *a7 ,
+					   void *a9 ,
+					   size_t a10 ,
+					   size_t a11 ,
+					   size_t a12 ,
+					   size_t a13 ,
+					   size_t a14 ,
+					   size_t a15 ,
+					   size_t a16) {
+	return 0;
+}
 VOID ThreadStart(_In_ PVOID StartContext) {
+	typedef void(__stdcall *pfun)(void *a1);
+	struct LOC_140009850 {
+		void **field_58;
+		void **field_60;
+	}loc_140009850={ 0 };
+	NTSTATUS status = 0;
+
+	STRU_14005B290 *context = StartContext;
+	KeSetPriorityThread((PKTHREAD)__readgsword(0x188) , 0x10);
+	while (1) {
+		for (; loc_140009850.field_58 == (void **)&loc_140009850.field_58;) {
+			for (; status;) {
+				loc_140009850.field_58 = (void **)&loc_140009850.field_58;
+				loc_140009850.field_60 = (void **)&loc_140009850.field_58;
+				status = KeWaitForSingleObject(&context->kevent_440 , 0 , 0 , 0 , 0);
+				if (context->field_460) {
+					PsTerminateSystemThread(0);
+				}
+			}
+			KIRQL kirql = KeAcquireSpinLockRaiseToDpc(&context->SpinLock_438);
+			if (context->field_468 != (void **)&context->field_468) {
+				context->field_468[1] = loc_140009850.field_60;
+				*loc_140009850.field_60 = context->field_468;
+				*context->field_470 = &loc_140009850.field_58;
+				loc_140009850.field_60 = context->field_470;
+				context->field_468 = (void **)&context->field_468;
+				context->field_470 = (void **)&context->field_468;
+			}
+			KeReleaseSpinLock(&context->SpinLock_438 , kirql);
+		}
+		for (int *pi = (int *)loc_140009850.field_58; loc_140009850.field_58 != (void **)&loc_140009850.field_58;) {
+			void *v = pi[-0x10] ? loc_140009850.field_58[-7] : 0;
+			sub_140008FF0(context ,
+						  loc_140009850.field_58[-9] ,
+						  loc_140009850.field_58[-0xa] ,
+						  pi[-0xa] ,
+						  0 ,
+						  0 ,
+						  v ,
+						  loc_140009850.field_58[-4] ,
+						  loc_140009850.field_58[-3] ,
+						  0 ,
+						  0 ,
+						  0 ,
+						  0 ,
+						  0 ,
+						  0 ,
+						  0);
+			void **v1 = loc_140009850.field_58[1] , **v2 = loc_140009850.field_58[0];
+			v2[1] = v1;
+			*v1 = v2;
+			loc_140009850.field_58[0] = 0;
+			loc_140009850.field_58[1] = 0;
+			if (loc_140009850.field_58[-2]) {
+				pfun fun = (pfun)loc_140009850.field_58[-2];
+				fun(loc_140009850.field_58[-3]);
+			}
+			pfun fun = (pfun)loc_140009850.field_58[-1];
+			fun(loc_140009850.field_58[-0xa]);
+			hr_ExFreePoolWithTag(loc_140009850.field_58[-0xa] , 0x54657671);
+		}
+	}
+
+
+
 
 }
 
@@ -274,10 +362,10 @@ NTSTATUS hr_CreateThread(STRU_14005B290 *ThreadContext) {
 	OBJECT_ATTRIBUTES ObjectAttributes;
 
 	memset(ThreadContext , 0 , sizeof(STRU_14005B290));
-	ThreadContext->field_438 = 0;
+	ThreadContext->SpinLock_438 = 0;
 	KeInitializeEvent(&ThreadContext->kevent_440 , SynchronizationEvent , 0);
-	ThreadContext->field_468 = &ThreadContext->field_468;
-	ThreadContext->field_470 = &ThreadContext->field_468;
+	ThreadContext->field_468 = (void **)&ThreadContext->field_468;
+	ThreadContext->field_470 = (void **)&ThreadContext->field_468;
 	ThreadContext->field_10 &= 0xfd;
 	ThreadContext->field_10 = (ThreadContext->field_10 & 0xFE) | (ExInitializeResourceLite(&ThreadContext->Resource_18) >= 0);
 	if (!(ThreadContext->field_10 & 1)) {
