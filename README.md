@@ -25,7 +25,7 @@
 
 ## 构建工具
 1. Visual Studio 2015 update3
-2. windows driver kit 14193
+2. windows driver kit 15063
 
 ## 下载
 - [下载wdk][98]
